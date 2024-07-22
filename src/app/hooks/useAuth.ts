@@ -8,11 +8,9 @@ export function useAuth() {
   useEffect(() => {
     const getSession = async () => {
       const response = await supabase.auth.getSession();
-      console.log("getSession response:", response);
 
       if (response && response.data) {
         const { session } = response.data;
-        console.log(`in getSession ${JSON.stringify(session)}`);
         setUser(session?.user ?? null);
       } else {
         setUser(null);
@@ -23,7 +21,6 @@ export function useAuth() {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        console.log(`in onAuthStateChange ${JSON.stringify(session)}`);
         setUser(session?.user ?? null);
       }
     );
