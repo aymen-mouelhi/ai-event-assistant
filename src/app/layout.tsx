@@ -1,27 +1,18 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import React from "react";
 import "../styles/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+console.log(React.version);
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "AI Event Assistant",
   description: "An AI-powered assistant for event planning",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
+      <body className="flex flex-col min-h-screen bg-dark text-light">
         {children}
-        <Footer />
       </body>
     </html>
   );
