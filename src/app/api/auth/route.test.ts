@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NextResponse } from "next/server";
-import {
-  createMockNextRequest,
-  createMockNextResponse,
-} from "../../../utils/testUtils";
+import { createMockNextRequest } from "../../../utils/testUtils";
 import { POST } from "./route";
 
 jest.mock("../../../utils/supabaseClient", () => ({
@@ -29,7 +28,6 @@ describe("POST /api/auth", () => {
     const req = createMockNextRequest(
       JSON.stringify({ email: "test@example.com" })
     );
-    const res = createMockNextResponse();
 
     await POST(req as any);
 
@@ -41,8 +39,6 @@ describe("POST /api/auth", () => {
 
   it("should handle logout requests", async () => {
     const req = createMockNextRequest(JSON.stringify({ type: "logout" }));
-    const res = createMockNextResponse();
-
     await POST(req as any);
 
     expect(NextResponse.json).toHaveBeenCalledWith(
@@ -53,8 +49,6 @@ describe("POST /api/auth", () => {
 
   it("should handle invalid requests", async () => {
     const req = createMockNextRequest(JSON.stringify({}));
-    const res = createMockNextResponse();
-
     await POST(req as any);
 
     expect(NextResponse.json).toHaveBeenCalledWith(
