@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    appDir: true,
-  },
-  basePath: "",
   async redirects() {
     return [
       {
@@ -29,8 +25,12 @@ const nextConfig = {
         destination: "/pages/check-email",
       },
       {
-        source: "/conversation",
-        destination: "/pages/conversation",
+        source: "/chat",
+        destination: "/pages/chat",
+      },
+      {
+        source: "/api/:path*",
+        destination: "/pages/api/:path*",
       },
     ];
   },

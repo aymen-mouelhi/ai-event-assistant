@@ -12,6 +12,22 @@ export function useAuth() {
       if (response && response.data) {
         const { session } = response.data;
         setUser(session?.user ?? null);
+
+        // Save user to the database if not exists
+        const { data: existingUser } = await supabase
+          .from("users")
+          .select("*")
+          .eq("email", session?.user?.email)
+          .single();
+
+        if (!existingUser && session?.user) {
+          await supabase.from("users").insert([
+            {
+              email: session.user.email,
+              id: session.user.id,
+            },
+          ]);
+        }
       } else {
         setUser(null);
       }
