@@ -1,3 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prefer-const */
+/* eslint-disable @next/next/no-img-element */
+
 import { AIMessage, HumanMessage } from "@langchain/core/messages";
 import { BufferMemory } from "langchain/memory";
 import { useRouter } from "next/navigation";

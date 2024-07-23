@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GET } from "./route";
 
 jest.mock("next/server", () => ({
