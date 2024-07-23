@@ -24,10 +24,10 @@ export default function Header() {
   };
 
   return (
-    <header className="flex items-center justify-between p-4 bg-gray-800 text-white">
+    <header className="flex items-center justify-between p-4 bg-gray-800 text-white z-50">
       <div>AI Event Assistant</div>
       {user && (
-        <div className="relative">
+        <div className="relative z-50">
           <div
             onClick={toggleMenu}
             className="flex items-center space-x-4 cursor-pointer"
@@ -40,7 +40,7 @@ export default function Header() {
             <span>{user.email}</span>
           </div>
           {menuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg py-2">
+            <div className="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg py-2 z-50">
               <Link href="/insights" legacyBehavior>
                 <a className="block px-4 py-2 text-sm text-white hover:bg-gray-600">
                   Insights

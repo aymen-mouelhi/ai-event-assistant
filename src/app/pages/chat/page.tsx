@@ -191,7 +191,7 @@ export default function ChatPage() {
             ))}
           </ul>
         </aside>
-        <main className="flex flex-col flex-grow bg-gray-700 p-4 relative">
+        <main className="flex flex-col flex-grow bg-gray-700 p-4 relative z-10">
           <ChatComponent
             selectedConversation={selectedConversation}
             setAlertMessage={setAlertMessage}

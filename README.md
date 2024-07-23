@@ -1,22 +1,23 @@
 # AI Event Assistant
 
-This project is a web application designed to assist users in organizing events by providing AI-generated suggestions and answers to queries related to event planning.
+AI Event Assistant is a sophisticated web application designed to help users plan and organize events efficiently by leveraging AI-generated suggestions and responses to event planning queries. This project integrates modern frontend and backend technologies, AI models, and a scalable database solution.
 
 ## Technology Stack
 
 - **Frontend**: Next.js, Tailwind CSS, TypeScript
 - **Backend**: Next.js API Routes
-- **Database**: Supabase
+- **Database**: Supabase (PostgreSQL)
 - **Auth**: Supabase’s passwordless authentication
-- **AI**: LangChain
+- **AI**: LangChain, OpenAI
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js
+- Node.js (>=18.17.0)
 - npm or yarn
 - Supabase account
+- OpenAI API Key
 
 ### Installation
 
@@ -38,10 +39,17 @@ This project is a web application designed to assist users in organizing events 
 3. Set up environment variables:
 
    ```bash
-   SUPABASE_URL=https://example-supabase-url.supabase.co
-   SUPABASE_KEY=example-supabase-key
-   NEXT_PUBLIC_SUPABASE_URL=$SUPABASE_URL
-   NEXT_PUBLIC_SUPABASE_KEY=$SUPABASE_KEY
+   NEXT_PUBLIC_SUPABASE_URL=https://dummy-supabase-url.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=dummy-supabase-key
+   NEXT_PUBLIC_REDIRECT_URL=http://localhost:3001/pages/chat
+   NEXT_PUBLIC_OPEN_AI_API_KEY=sk-key
+   DATABASE_URL="postgresql://localhost:5432/db"
+   ```
+
+4. Generate Prisma client:
+
+   ```bash
+   npx prisma generate
    ```
 
 ### Running the Application
@@ -54,7 +62,7 @@ npm run dev
 yarn dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Open http://localhost:3001 with your browser to see the result.
 
 ### Building for Production
 
@@ -73,6 +81,26 @@ npm start
 # or
 yarn start
 ```
+
+### Development Workflow
+
+1. Feature Development: Create a new branch from main for your feature.
+2. Write Tests: Ensure all new features and bug fixes are covered by tests.
+3. Run Tests: Use npm test to run the test suite and ensure all tests pass.
+4. Lint and Format: Use npm run lint to check for linting errors and npm run format to format the code.
+5. Code Review: Open a pull request and request a code review from your team.
+6. Merge: After approval, merge the feature branch back into main.
+
+## Documentation
+
+For detailed technical information, please refer to the [Technical Documentation](docs/Technical_Documentation.md).
+
+### Future Improvements
+
+- Integrate LangChain memory for enhanced conversational capabilities.
+- Improve the UI/UX with more interactive elements.
+- Add more customization options for event planning.
+- Support Social Login
 
 ### License
 
