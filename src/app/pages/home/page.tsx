@@ -1,8 +1,17 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const accessToken = searchParams.get("access_token");
+    if (accessToken) {
+      router.replace("/pages/chat");
+    }
+  }, [router, searchParams]);
 
   const handleLoginClick = () => {
     router.push("/login");
