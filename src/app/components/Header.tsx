@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 
 export default function Header() {
   const [user, setUser] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
@@ -17,17 +19,35 @@ export default function Header() {
     getUser();
   }, []);
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header className="flex items-center justify-between p-4 bg-gray-800 text-white">
       <div>AI Event Assistant</div>
       {user && (
-        <div className="flex items-center space-x-4">
-          <img
-            src={`https://ui-avatars.com/api/?name=${user.email}`}
-            alt="User Avatar"
-            className="w-10 h-10 rounded-full"
-          />
-          <span>{user.email}</span>
+        <div className="relative">
+          <div
+            onClick={toggleMenu}
+            className="flex items-center space-x-4 cursor-pointer"
+          >
+            <img
+              src={`https://ui-avatars.com/api/?name=${user.email}`}
+              alt="User Avatar"
+              className="w-10 h-10 rounded-full"
+            />
+            <span>{user.email}</span>
+          </div>
+          {menuOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg py-2">
+              <Link href="/insights" legacyBehavior>
+                <a className="block px-4 py-2 text-sm text-white hover:bg-gray-600">
+                  Insights
+                </a>
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </header>

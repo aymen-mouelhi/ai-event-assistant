@@ -8,12 +8,26 @@ export function useAuth() {
   useEffect(() => {
     const getSession = async () => {
       const response = await supabase.auth.getSession();
-      console.log("getSession response:", response);
 
       if (response && response.data) {
         const { session } = response.data;
-        console.log(`in getSession ${JSON.stringify(session)}`);
         setUser(session?.user ?? null);
+
+        // Save user to the database if not exists
+        const { data: existingUser } = await supabase
+          .from("users")
+          .select("*")
+          .eq("email", session?.user?.email)
+          .single();
+
+        if (!existingUser && session?.user) {
+          await supabase.from("users").insert([
+            {
+              email: session.user.email,
+              id: session.user.id,
+            },
+          ]);
+        }
       } else {
         setUser(null);
       }
@@ -23,7 +37,6 @@ export function useAuth() {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        console.log(`in onAuthStateChange ${JSON.stringify(session)}`);
         setUser(session?.user ?? null);
       }
     );

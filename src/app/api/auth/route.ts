@@ -20,7 +20,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
-    const response = await supabase.auth.signInWithOtp({ email });
+    const response = await supabase.auth.signInWithOtp({
+      email: email,
+      options: {
+        emailRedirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL,
+      },
+    });
 
     if (response?.error) {
       return NextResponse.json(
