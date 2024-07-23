@@ -1,26 +1,24 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { supabase } from "../../../utils/supabaseClient";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const redirectTo = process.env.NEXT_PUBLIC_REDIRECT_URL;
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch("/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, type: "login" }),
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: redirectTo },
     });
 
-    if (res.ok) {
+    if (!error) {
       router.push("/check-email");
     } else {
-      const data = await res.json();
-      alert(data.error);
+      alert(error.message);
     }
   };
 

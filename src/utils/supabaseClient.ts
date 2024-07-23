@@ -8,8 +8,6 @@ if (!supabaseUrl || !supabaseKey || !supabaseRedirectTo) {
   throw new Error("Missing Supabase URL or Key or RedirectTo");
 }
 
-console.log(`supabaseRedirectTo: ${supabaseRedirectTo}`);
-
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
     autoRefreshToken: true,
