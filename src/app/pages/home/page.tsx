@@ -1,8 +1,8 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
-export default function HomePage() {
+function RedirectHandler() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -13,12 +13,21 @@ export default function HomePage() {
     }
   }, [router, searchParams]);
 
+  return null;
+}
+
+export default function HomePage() {
+  const router = useRouter();
+
   const handleLoginClick = () => {
     router.push("/login");
   };
 
   return (
     <div className="flex h-screen">
+      <Suspense fallback={null}>
+        <RedirectHandler />
+      </Suspense>
       <div className="w-1/2 bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white text-5xl font-bold p-10">
         Plan your perfect event effortlessly with our assistance.
       </div>
