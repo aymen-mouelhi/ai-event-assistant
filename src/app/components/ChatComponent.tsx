@@ -119,7 +119,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({
 
   const processUserMessage = async (message: any) => {
     setMessages([...messages, message]);
-    // @ts-ignore
+    // @ts-expect-error The state updater function expects a number
     setMessageCount((prevCount: number) => prevCount + 1);
     await updateRateLimit(message.user_id, messageCount + 1);
     await saveMessage(message);
@@ -152,7 +152,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({
   };
 
   const updateMessages = (message: any) => {
-    // @ts-ignore
+    // @ts-expect-error The state updater function expects an array of messages
     setMessages((prevMessages) => {
       const updatedMessages = prevMessages.filter(
         (msg) => msg.id !== message.id
