@@ -48,7 +48,7 @@ The architecture of AI Event Assistant includes:
         |                          |                            |
 +----------------+        +------------------+        +--------------------+
 |                |        |                  |        |                    |
-|   AI Engine    <--------+   OpenAI         <--------+    LangChain       |
+|   AI Engine    <--------+   With Martian   <--------+    LangChain       |
 | (LangChain)    |        |  (AI Model)      |        | API Integration    |
 |                |        |                  |        |                    |
 +----------------+        +------------------+        +--------------------+
@@ -75,12 +75,14 @@ The architecture of AI Event Assistant includes:
 
 - **LangChain**: Framework for developing applications with large language models (LLMs).
 - **OpenAI**: API for accessing powerful AI models to generate event-related suggestions.
+  We use GPT 4o using With Martian for LLM Routing
 
 ## 4. Technology Choices and Justifications
 
 ### LangChain and OpenAI
 
 - **LangChain**: Chosen for its flexibility and powerful abstractions to manage conversations and interactions with large language models.
+- **WithMartian**: Chosen for an efficient LLM routing and cost reduction initiative.
 - **OpenAI**: Provides access to state-of-the-art AI models, allowing for the generation of meaningful, relevant, and actionable responses to user queries.
 
 ### Supabase
@@ -188,7 +190,7 @@ Before you begin, ensure you have the following:
    NEXT_PUBLIC_SUPABASE_URL=https://dummy-supabase-url.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=dummy-supabase-key
    NEXT_PUBLIC_REDIRECT_URL=http://localhost:3001/pages/chat
-   NEXT_PUBLIC_OPEN_AI_API_KEY=sk-key
+   NEXT_PUBLIC_WITH_MARTIAN_API_KEY=sk-key
    DATABASE_URL="postgresql://localhost:5432/db"
    ```
 
