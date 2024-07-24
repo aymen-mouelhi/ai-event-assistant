@@ -22,8 +22,11 @@ export const prompt = ChatPromptTemplate.fromTemplate(`
 
 export const llm = new ChatOpenAI({
   temperature: 0.7,
-  apiKey: process.env.NEXT_PUBLIC_OPEN_AI_API_KEY,
-  maxTokens: 250,
+  openAIApiKey: process.env.NEXT_PUBLIC_WITH_MARTIAN_API_KEY,
+  maxTokens: 500,
+  configuration: {
+    baseURL: "https://withmartian.com/api/openai/v1",
+  },
 });
 
 export const getLLMResponse = async (input: string) => {
