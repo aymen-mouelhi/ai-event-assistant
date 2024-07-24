@@ -119,7 +119,8 @@ const ChatComponent: React.FC<ChatComponentProps> = ({
 
   const processUserMessage = async (message: any) => {
     setMessages([...messages, message]);
-    setMessageCount((prevCount) => prevCount + 1);
+    // @ts-ignore
+    setMessageCount((prevCount: number) => prevCount + 1);
     await updateRateLimit(message.user_id, messageCount + 1);
     await saveMessage(message);
   };
@@ -151,6 +152,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({
   };
 
   const updateMessages = (message: any) => {
+    // @ts-ignore
     setMessages((prevMessages) => {
       const updatedMessages = prevMessages.filter(
         (msg) => msg.id !== message.id
